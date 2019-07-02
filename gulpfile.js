@@ -13,7 +13,9 @@ function style() {
 
 function watch() {
   browserSync.init({
-    server: "./src"
+    server: {
+      baseDir: "./src/"
+    }
   });
 
   gulp.watch("./src/scss/**/*.scss", style);
@@ -28,7 +30,7 @@ function copyToDist() {
 
 function watchDist() {
   browserSync.init({
-    server: "./dist"
+    server: "./dist/"
   });
 }
 exports.style = style;
