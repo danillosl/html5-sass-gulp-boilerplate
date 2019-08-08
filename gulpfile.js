@@ -6,7 +6,7 @@ const browserSync = require("browser-sync").create();
 function style() {
   return gulp
     .src("./src/scss/**/*.scss")
-    .pipe(sass())
+    .pipe(sass().on("error", sass.logError))
     .pipe(gulp.dest("./src/css"))
     .pipe(browserSync.stream());
 }
@@ -33,6 +33,6 @@ function watchDist() {
     server: "./dist/"
   });
 }
-exports.style = style;
-exports.watch = watch;
-exports.build = gulp.series(style, copyToDist, watchDist);
+exports.default = gulp.series(style, watch);
+exports.build = gulp.series(style, copyToDist);
+exports.watchDist = gulp.series(style, copyToDist, watchDist);
